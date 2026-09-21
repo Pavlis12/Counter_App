@@ -13,5 +13,14 @@
     </ion-toolbar>
   </ion-header>
 
+  <h1>{{ count }}</h1> <!-- {{ counterName }} binding -->
+  <h2>{{ counterName }}</h2> 
+
+  <ion-button color="primary" (click)="increment()">+</ion-button>
+  <ion-button color="danger" (click)="decrement()">-</ion-button>
+  <ion-button color="medium" fill="outline" [disabled]="count === 0"(click)="reset()">Reset</ion-button>
+
+  <ion-input placeholder="Enter counter name" [(ngModel)]="counterName"></ion-input>
+
   <app-explore-container name="Tab 1 page"></app-explore-container>
 </ion-content>

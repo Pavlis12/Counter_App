@@ -23,4 +23,10 @@ describe('TabsPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should increment the count when increment() is called', () => {
+    component.increment();
+    expect(component.count).toBe(1);
+  });
+  
 });
