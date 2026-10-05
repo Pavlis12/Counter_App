@@ -1,29 +1,39 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonInput} from '@ionic/angular';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { FormsModule } from '@angular/forms';
+import {
+  IonContent,
+  IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonNote,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
+import { CounterComponent } from '../components/counter/counter.component';
+import { SavedCounter } from '../models/saved-counter';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonButton, ExploreContainerComponent, IonInput, FormsModule],
+  imports: [
+    CounterComponent,
+    IonContent,
+    IonHeader,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonListHeader,
+    IonNote,
+    IonTitle,
+    IonToolbar,
+  ],
 })
 export class Tab1Page {
-    count = 0;
-    counterName = '';
-    increment(): void { //metda increement s navratovou hodnotou void
-        this.count++;
-    } 
+  savedCounters: SavedCounter[] = [];
 
-    decrement(): void {
-      if (this.count > 0) 
-        {
-          this.count--;
-        }     
-    }
-
-    reset(): void {
-      this.count = 0;
-    }
+  onSaved(counter: SavedCounter): void {
+    this.savedCounters.unshift(counter);
+  }
 }

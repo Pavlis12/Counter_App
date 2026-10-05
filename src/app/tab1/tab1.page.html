@@ -1,26 +1,34 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>CounterApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <app-counter
+    heading="Nové počítadlo"
+    (saved)="onSaved($event)"
+  ></app-counter>
 
-  <h1>{{ count }}</h1> <!-- {{ counterName }} binding -->
-  <h2>{{ counterName }}</h2> 
+  @if (savedCounters.length > 0) {
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Uložená počítadla</ion-label>
+      </ion-list-header>
 
-  <ion-button color="primary" (click)="increment()">+</ion-button>
-  <ion-button color="danger" (click)="decrement()">-</ion-button>
-  <ion-button color="medium" fill="outline" [disabled]="count === 0"(click)="reset()">Reset</ion-button>
-
-  <ion-input placeholder="Enter counter name" [(ngModel)]="counterName"></ion-input>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+      @for (counter of savedCounters; track counter.id) {
+        <ion-item>
+          <ion-label>
+            <h2>{{ counter.name }}</h2>
+            <p>{{ counter.id }}</p>
+          </ion-label>
+          <ion-note slot="end">{{ counter.value }}</ion-note>
+        </ion-item>
+      }
+    </ion-list>
+  } @else {
+    <p class="empty-state">
+      Zatím nebylo uloženo žádné počítadlo.
+    </p>
+  }
 </ion-content>
