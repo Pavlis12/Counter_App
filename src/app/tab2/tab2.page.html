@@ -31,6 +31,15 @@
     </ion-note>
   </ion-item>
 
+  <ion-item color="light">
+  <ion-label>
+    <strong>Průměr hodnot:</strong>
+  </ion-label>
+  <ion-note slot="end" color="tertiary">
+    <strong>{{ averageValue() }}</strong>
+  </ion-note>
+</ion-item>
+
   <ion-list>
     @for (counter of processedCounters(); track counter.id) {
       <ion-item>

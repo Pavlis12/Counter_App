@@ -52,6 +52,15 @@ export class Tab2Page implements OnInit {
     return this.counterService.counters().reduce((sum, item) => sum + item.value, 0);
   });
 
+averageValue = computed(() => {
+  const counters = this.counterService.counters();
+  if (counters.length === 0) {
+    return 0; 
+  }
+  const avg = this.totalSum() / counters.length;
+  return Math.round(avg * 100) / 100;
+});
+
 processedCounters = computed(() => {
     let currentCounters = this.counterService.counters();
     const query = this.searchQuery().toLowerCase();
