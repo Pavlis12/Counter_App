@@ -31,14 +31,25 @@
     </ion-note>
   </ion-item>
 
-  <ion-item color="light">
+<ion-item color="light">
   <ion-label>
-    <strong>Průměr hodnot:</strong>
+    <strong>Celkový součet:</strong>
   </ion-label>
-  <ion-note slot="end" color="tertiary">
-    <strong>{{ averageValue() }}</strong>
+  <ion-note slot="end" color="primary">
+    <strong>{{ totalSum() }}</strong>
   </ion-note>
 </ion-item>
+
+@if (minValue() !== null && maxValue() !== null) {
+  <ion-item color="light">
+    <ion-label>
+      <strong>Min / Max hodnota:</strong>
+    </ion-label>
+    <ion-note slot="end" color="secondary">
+      <strong>{{ minValue() }} / {{ maxValue() }}</strong>
+    </ion-note>
+  </ion-item>
+}
 
   <ion-list>
     @for (counter of processedCounters(); track counter.id) {
