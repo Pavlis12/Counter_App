@@ -8,13 +8,12 @@ import {
   IonLabel,
   IonList,
   IonNote,
-  IonSpinner,
   IonTitle,
   IonToolbar,
-  AlertController, 
-  ToastController, 
-  IonSearchbar, 
-  IonSelect, 
+  AlertController,
+  ToastController,
+  IonSearchbar,
+  IonSelect,
   IonSelectOption,
 } from '@ionic/angular';
 import { CounterService } from '../services/counter.service';
@@ -32,7 +31,6 @@ import { CounterService } from '../services/counter.service';
     IonLabel,
     IonList,
     IonNote,
-    IonSpinner,
     IonTitle,
     IonToolbar,
     IonSearchbar,
@@ -42,6 +40,7 @@ import { CounterService } from '../services/counter.service';
 })
 export class Tab2Page implements OnInit {
   readonly counterService = inject(CounterService);
+  
   private readonly alertCtrl = inject(AlertController);
   private readonly toastCtrl = inject(ToastController);
 
@@ -52,16 +51,19 @@ export class Tab2Page implements OnInit {
     return this.counterService.counters().reduce((sum, item) => sum + item.value, 0);
   });
 
-averageValue = computed(() => {
-  const counters = this.counterService.counters();
-  if (counters.length === 0) {
-    return 0; 
-  }
-  const avg = this.totalSum() / counters.length;
-  return Math.round(avg * 100) / 100;
-});
+  minValue = computed(() => {
+    const counters = this.counterService.counters();
+    if (counters.length === 0) return null;
+    return Math.min(...counters.map(c => c.value));
+  });
 
-processedCounters = computed(() => {
+  maxValue = computed(() => {
+    const counters = this.counterService.counters();
+    if (counters.length === 0) return null;
+    return Math.max(...counters.map(c => c.value));
+  });
+
+  processedCounters = computed(() => {
     let currentCounters = this.counterService.counters();
     const query = this.searchQuery().toLowerCase();
 
